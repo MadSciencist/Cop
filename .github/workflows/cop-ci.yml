@@ -16,7 +16,7 @@ jobs:
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: Run tests
-      run: dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage.xml
+      run: dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage.xml
     - name: Upload coverage to Codecov  
       uses: codecov/codecov-action@v1.0.3
       with:
