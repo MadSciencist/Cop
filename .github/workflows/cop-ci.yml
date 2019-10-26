@@ -23,7 +23,7 @@ jobs:
       uses: codecov/codecov-action@v1.0.3
       with:
         token: ${{secrets.CODECOV_TOKEN}}
-        file: ./tests/Cop/.Tests/coverage.xml
+        file: ./tests/Cop.Tests/coverage.xml
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v1.1
       env:
