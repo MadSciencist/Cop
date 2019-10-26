@@ -16,4 +16,17 @@ jobs:
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: Run tests
-      run: dotnet test --configuration Release
+      run: dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage.xml
+    - name: list files
+      run: ls -la ./tests/Cop.Tests
+    - name: Upload coverage to Codecov  
+      uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./tests/Cop/.Tests/coverage.xml
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v1.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    
