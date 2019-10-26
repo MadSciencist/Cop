@@ -48,5 +48,5 @@ That means:
  *  The Pets list will be applied to Pets list only if DTO pets list is not null;
  *  The OtherPets list wiill be applied to FavoritePets lists on the entity object (here we are breaking default naming convention);
  *  The CreatedById property will stay untauched.
- *  
+
 Simple as that!
