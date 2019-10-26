@@ -19,12 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{DF082E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4A2F35D6-DA0F-4F61-9E2D-1B3192EFBFA3}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\github-actions.yml = .github\workflows\github-actions.yml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "properties", "properties", "{6D23282F-8D94-4B32-A8FB-B006678A0936}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\properties\github-actions.properties.json = .github\workflows\properties\github-actions.properties.json
+		.github\workflows\ci.yml = .github\workflows\ci.yml
 	EndProjectSection
 EndProject
 Global
@@ -48,7 +43,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DF082E40-26F9-46C5-82DF-40B57ED4CC0F} = {72B30983-98E0-43B9-8D6D-65EB70F75F28}
 		{4A2F35D6-DA0F-4F61-9E2D-1B3192EFBFA3} = {DF082E40-26F9-46C5-82DF-40B57ED4CC0F}
-		{6D23282F-8D94-4B32-A8FB-B006678A0936} = {4A2F35D6-DA0F-4F61-9E2D-1B3192EFBFA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32626177-2DC1-463F-9BB6-9B6A6100B2EA}
