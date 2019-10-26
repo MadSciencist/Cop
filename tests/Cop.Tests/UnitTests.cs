@@ -7,7 +7,7 @@ namespace Cop.Tests
     public class UnitTests
     {
         [Fact]
-        public void Cop_CanCopyPropertiesWithCopyAttributeAndSameName()
+        public void Cop_CanCopyPropertiesWithCopyAttribute_SameTargetName()
         {
             var dto = new SampleDto
             {
@@ -33,7 +33,7 @@ namespace Cop.Tests
         }
 
         [Fact]
-        public void Cop_CanCopyPropertiesWithCopyAttribute_AlwaysCopy_AndSameName()
+        public void Cop_CanCopyPropertiesWithCopyAttribute_AlwaysCopy_SameTargetName()
         {
             var dto = new SampleCopyAlwaysDto
             {
@@ -59,12 +59,12 @@ namespace Cop.Tests
         }
 
         [Fact]
-        public void Cop_CanCopyPropertiesWithCopyAttribute_SkipIfInputNull_AndSameName()
+        public void Cop_CanCopyPropertiesWithCopyAttribute_SkipIfInputNull_SameTargetName()
         {
-            var dto = new SampleCopyAlwaysDto
+            var dto = new SampleSkipIfNullDto
             {
                 Name = null,
-                IsActive = false,
+                IsActive = true,
                 Pets = null
             };
 
@@ -79,6 +79,81 @@ namespace Cop.Tests
             Assert.NotNull(entity.Pets);
             Assert.Equal(entity.IsActive, dto.IsActive);
 
+            Assert.Equal(1111, entity.CreatedById);
+            Assert.Equal(user, entity.CreatedBy);
+            Assert.Equal(now, entity.Created);
+        }
+
+        [Fact]
+        public void Cop_CanCopyPropertiesWithCopyAttribute_CopyAll_DifferentTargetName()
+        {
+            var dto = new SampleCopyAllToDifferentTargetDto
+            {
+                Name = "Rychu",
+                Pets = new List<string> { "bird", "unicorn" }
+            };
+
+            var now = DateTime.UtcNow;
+            var user = GetSampleUser();
+            var entity = GetSampleEntity(user, now);
+
+            var cop = new Cop();
+            entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
+
+            Assert.NotNull(entity.Name);
+            Assert.Equal("John", entity.Name);
+            Assert.NotNull(entity.Pets);
+            Assert.Equal(dto.Pets, entity.FavoritePets);
+            Assert.Equal(dto.Name, entity.NickName);
+
+            Assert.Equal(1111, entity.CreatedById);
+            Assert.Equal(user, entity.CreatedBy);
+            Assert.Equal(now, entity.Created);
+        }
+
+        [Fact]
+        public void Cop_CanCopyPropertiesWithCopyAttribute_SkipIfInputNull_DifferentTargetName()
+        {
+            var dto = new SampleSkipIfNullToDifferentTargetDto
+            {
+                Name = "Rychu",
+                Pets = null
+            };
+
+            var now = DateTime.UtcNow;
+            var user = GetSampleUser();
+            var entity = GetSampleEntity(user, now);
+
+            var cop = new Cop();
+            entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
+
+            Assert.NotNull(entity.Name);
+            Assert.NotNull(entity.Pets);
+            Assert.Equal(2, entity.Pets.Count);
+            Assert.Equal(1111, entity.CreatedById);
+            Assert.Equal(user, entity.CreatedBy);
+            Assert.Equal(now, entity.Created);
+        }
+
+        [Fact]
+        public void Cop_CanCopyAllPropertiesWithCopyAttribute_DifferentTargetName()
+        {
+            var dto = new SampleSkipIfNullToDifferentTargetDto
+            {
+                Name = "Rychu",
+                Pets = null
+            };
+
+            var now = DateTime.UtcNow;
+            var user = GetSampleUser();
+            var entity = GetSampleEntity(user, now);
+
+            var cop = new Cop();
+            entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
+
+            Assert.NotNull(entity.Name);
+            Assert.NotNull(entity.Pets);
+            Assert.Equal(2, entity.Pets.Count);
             Assert.Equal(1111, entity.CreatedById);
             Assert.Equal(user, entity.CreatedBy);
             Assert.Equal(now, entity.Created);

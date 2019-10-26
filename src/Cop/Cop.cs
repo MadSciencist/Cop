@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Cop.Strategies;
 using System.Reflection;
-using System.Text;
 
 namespace Cop
 {
@@ -10,22 +7,17 @@ namespace Cop
     {
         public TOutput Copy<TOutput, TInput>(TOutput output, TInput input) where TInput : class where TOutput : class
         {
-            GuardNotNull<TInput>(input);
-            GuardNotNull<TOutput>(output);
+            Guard.GuardNotNull(input, nameof(input));
+            Guard.GuardNotNull(output, nameof(output));
 
-
-            foreach (var property in input.GetType().GetProperties())
+            foreach (var propertyInfo in input.GetType().GetProperties())
             {
-                var copInfo = GetCopPropertyInfo(property);
+                var copInfo = GetCopPropertyInfo(propertyInfo);
                 if (copInfo is null) continue; // No Copy attribute at all
 
-                var outputProperties = output.GetType().GetProperties();
-
-                var currentOutputProperty = outputProperties.FirstOrDefault(x =>
-                    x.Name == property.Name &&
-                    x.CustomAttributes.Any(attr => attr.AttributeType == typeof(CopyAttribute)));
-
-                currentOutputProperty?.SetValue(output, property.GetValue(input));
+                var strategy = StrategyFactory.GetStrategy(copInfo);
+                var context = new ExecutionContext(copInfo, input, output, propertyInfo);
+                strategy.Execute(context);
             }
 
             return output;
@@ -40,17 +32,9 @@ namespace Cop
             return new CopInfo
             {
                 PropertyName = property.Name,
-                CopyOption = copyAttribute.CopyOption,
+                CopyOption = copyAttribute.CopyOption == 0 ? CopyOption.CopyAlways : copyAttribute.CopyOption,
                 TargetPropertyName = copyAttribute.OutputPropertyName
             };
-        }
-
-        private static void GuardNotNull<TObject>(TObject obj) where TObject : class
-        {
-            if (obj is null)
-            {
-                throw new ArgumentNullException(nameof(TObject));
-            }
         }
     }
 }

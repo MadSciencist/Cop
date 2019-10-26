@@ -1,7 +1,7 @@
 ﻿namespace Cop.Strategies
 {
-    public interface ICopyStrategy
+    internal interface ICopyStrategy
     {
-        void Execute();
+        void Execute(ExecutionContext context);
     }
 }

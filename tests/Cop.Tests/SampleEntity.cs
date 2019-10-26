@@ -34,6 +34,22 @@ namespace Cop.Tests
         public override bool IsActive { get; set; }
     }
 
+    public class SampleCopyAllToDifferentTargetDto : SampleDto
+    {
+        [Copy(nameof(SampleEntity.NickName))]
+        public override string Name { get; set; }
+        [Copy(nameof(SampleEntity.FavoritePets))]
+        public override List<string> Pets { get; set; }
+    }
+
+    public class SampleSkipIfNullToDifferentTargetDto : SampleDto
+    {
+        [Copy(nameof(SampleEntity.NickName), CopyOption.SkipIfInputNull)]
+        public override string Name { get; set; }
+        [Copy(nameof(SampleEntity.FavoritePets), CopyOption.SkipIfInputNull)]
+        public override List<string> Pets { get; set; }
+    }
+
     public class SampleEntity
     {
         public virtual Guid Guid { get; set; }
@@ -43,7 +59,11 @@ namespace Cop.Tests
         public virtual bool IsActive { get; set; }
         [Copy]
         public virtual List<string> Pets { get; set; }
+        [Copy]
+        public virtual List<string> FavoritePets { get; set; }
         public virtual DateTime Created { get; set; }
+        [Copy]
+        public virtual string NickName { get; set; }
         public virtual int CreatedById { get; set; }
         public virtual User CreatedBy { get; set; }
     }
