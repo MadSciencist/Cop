@@ -20,7 +20,7 @@ namespace Cop.Tests
             var user = GetSampleUser();
             var entity = GetSampleEntity(user, now);
 
-            var cop = new Cop();
+            ICop cop = new Cop();
             entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
 
             Assert.Equal(entity.Name, dto.Name);
@@ -46,7 +46,7 @@ namespace Cop.Tests
             var user = GetSampleUser();
             var entity = GetSampleEntity(user, now);
 
-            var cop = new Cop();
+            ICop cop = new Cop();
             entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
 
             Assert.Equal(entity.Name, dto.Name);
@@ -72,7 +72,7 @@ namespace Cop.Tests
             var user = GetSampleUser();
             var entity = GetSampleEntity(user, now);
 
-            var cop = new Cop();
+            ICop cop = new Cop();
             entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
 
             Assert.NotNull(entity.Name);
@@ -97,7 +97,7 @@ namespace Cop.Tests
             var user = GetSampleUser();
             var entity = GetSampleEntity(user, now);
 
-            var cop = new Cop();
+            ICop cop = new Cop();
             entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
 
             Assert.NotNull(entity.Name);
@@ -124,7 +124,7 @@ namespace Cop.Tests
             var user = GetSampleUser();
             var entity = GetSampleEntity(user, now);
 
-            var cop = new Cop();
+            ICop cop = new Cop();
             entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
 
             Assert.NotNull(entity.Name);
@@ -148,7 +148,7 @@ namespace Cop.Tests
             var user = GetSampleUser();
             var entity = GetSampleEntity(user, now);
 
-            var cop = new Cop();
+            ICop cop = new Cop();
             entity = cop.Copy<SampleEntity, SampleDto>(entity, dto);
 
             Assert.NotNull(entity.Name);

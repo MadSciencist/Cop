@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Cop
 {
-    public class Cop
+    public class Cop : ICop
     {
         public TOutput Copy<TOutput, TInput>(TOutput output, TInput input) where TInput : class where TOutput : class
         {
