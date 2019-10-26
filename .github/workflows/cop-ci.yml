@@ -21,7 +21,7 @@ jobs:
       uses: codecov/codecov-action@v1.0.3
       with:
         token: ${{secrets.CODECOV_TOKEN}}
-        file: /tests/Cop.Tests/coverage.opencover.xml
+        file: tests/Cop.Tests/coverage.opencover.xml
         name: codecov-umbrella 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v1.1
