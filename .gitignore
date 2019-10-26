@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/.sonarqube
+/tests/Cop.Tests/coverage.xml
+/tests/Cop.Tests/lcov.info
