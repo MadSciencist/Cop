@@ -18,10 +18,10 @@ jobs:
     - name: Add dotnet tools env variable
       run: export PATH="$PATH:$HOME/.dotnet/tools"
     - name: init sonnarscanner
-      run: dotnet-sonarscanner begin /k:"MadSciencist_Cop" /n:"Cop" /v:"1.0.0" /o:"madsciencist-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_TOKEN" /d:sonar.language="cs" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*" /d:sonar.cs.opencover.reportsPaths="lcov.opencover.xml" || true
+      run: dotnet sonarscanner begin /k:"MadSciencist_Cop" /n:"Cop" /v:"1.0.0" /o:"madsciencist-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_TOKEN" /d:sonar.language="cs" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*" /d:sonar.cs.opencover.reportsPaths="lcov.opencover.xml" || true
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: Run tests
       run: dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-    - name: Finalize sonnarscanner
-      run: dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN" || true
+    - name: Finalize sonar scanner
+      run: dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN" || true
