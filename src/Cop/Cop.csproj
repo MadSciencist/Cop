@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Mateusz Kryszczak</Authors>
+    <Company />
+    <Description>.NET Reflection-based, attribute configurable property copier.</Description>
+    <Copyright>Copyright 2019 Mateusz K.</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/MadSciencist/Cop</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MadSciencist/Cop</RepositoryUrl>
+    <NeutralLanguage>English</NeutralLanguage>
+    <PackageTags>net reflection based attribute properyt copy autocopy</PackageTags>
+    <RepositoryType>Git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
