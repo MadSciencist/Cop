@@ -9,6 +9,7 @@ namespace Cop
 
         public CopyAttribute()
         {
+            CopyOption = CopyOption.CopyAlways;
         }
 
         public CopyAttribute(CopyOption copyOption)
@@ -16,21 +17,10 @@ namespace Cop
             CopyOption = copyOption;
         }
 
-        public CopyAttribute(string outputPropertyName)
-        {
-            OutputPropertyName = outputPropertyName;
-        }
-
         public CopyAttribute(string outputPropertyName, CopyOption copyOption = CopyOption.CopyAlways)
         {
             OutputPropertyName = outputPropertyName;
             CopyOption = copyOption;
         }
-    }
-
-    public enum CopyOption
-    { 
-        CopyAlways = 1,
-        SkipIfInputNull = 2
     }
 }

@@ -4,7 +4,7 @@ namespace Cop
 {
     internal class Guard
     {
-        internal static void GuardNotNull(object obj, string name)
+        internal static void NotNull(object obj, string name)
         {
             if (obj is null)
             {

@@ -7,12 +7,12 @@ namespace Cop
     {
         public TOutput Copy<TOutput, TInput>(TOutput output, TInput input) where TInput : class where TOutput : class
         {
-            Guard.GuardNotNull(input, nameof(input));
-            Guard.GuardNotNull(output, nameof(output));
+            Guard.NotNull(input, nameof(input));
+            Guard.NotNull(output, nameof(output));
 
             foreach (var propertyInfo in input.GetType().GetProperties())
             {
-                var copInfo = GetCopPropertyInfo(propertyInfo);
+                var copInfo = GetCopPropertyInfo(propertyInfo, input);
                 if (copInfo is null) continue; // No Copy attribute at all
 
                 var strategy = StrategyFactory.GetStrategy(copInfo);
@@ -23,7 +23,7 @@ namespace Cop
             return output;
         }
 
-        private static CopInfo GetCopPropertyInfo(MemberInfo property)
+        private static CopInfo GetCopPropertyInfo(PropertyInfo property, object input)
         {
             var copyAttribute = property.GetCustomAttribute<CopyAttribute>(true);
 
@@ -32,8 +32,9 @@ namespace Cop
             return new CopInfo
             {
                 PropertyName = property.Name,
-                CopyOption = copyAttribute.CopyOption == 0 ? CopyOption.CopyAlways : copyAttribute.CopyOption,
-                TargetPropertyName = copyAttribute.OutputPropertyName
+                CopyOption = copyAttribute.CopyOption,
+                TargetPropertyName = copyAttribute.OutputPropertyName,
+                IsInputPropertyNull = property.GetValue(input) is null
             };
         }
     }

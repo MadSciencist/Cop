@@ -6,19 +6,19 @@ namespace Cop.Strategies
     {
         internal static ICopyStrategy GetStrategy(CopInfo copInfo)
         {
-            Guard.GuardNotNull(copInfo, nameof(copInfo));
+            Guard.NotNull(copInfo, nameof(copInfo));
 
             switch (copInfo)
             {
-                case var _ when copInfo.CopyOption == CopyOption.SkipIfInputNull:
-                    return new SkipIfInputNullStrategy();
-
                 case var _ when copInfo.CopyOption == CopyOption.SkipIfInputNull
-                    && copInfo.PropertyName != null:
+                    && copInfo.TargetPropertyName != null && copInfo.IsInputPropertyNull:
                     return new SkipIfInputNullToDifferentTargetNameStrategy();
 
                 case var _ when copInfo.TargetPropertyName != null:
                     return new CopyAllToDifferentTargetNameStrategy();
+
+                case var _ when copInfo.CopyOption == CopyOption.SkipIfInputNull:
+                    return new SkipIfInputNullStrategy();
 
                 case var _ when copInfo.CopyOption == CopyOption.CopyAlways:
                     return new CopyAllStrategy();

@@ -4,10 +4,10 @@ namespace Cop.Strategies
 {
     internal class ExecutionContext
     {
-        internal CopInfo CopInfo { get; }
-        internal object InputObj { get; }
-        internal object OutputObj { get; }
-        internal PropertyInfo InputProperty { get; }
+        public CopInfo CopInfo { get; }
+        public object InputObj { get; }
+        public object OutputObj { get; }
+        public PropertyInfo InputProperty { get; }
 
         public ExecutionContext(CopInfo copInfo, object inputObj, object outputObj, PropertyInfo inputProperty)
         {

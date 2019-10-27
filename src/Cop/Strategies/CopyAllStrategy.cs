@@ -8,8 +8,8 @@ namespace Cop.Strategies
         public void Execute(ExecutionContext context)
         {
             var inputProperty = context.InputProperty;
-            var currentOutputProperty = FindMatchingOutputProperty(context);
-            currentOutputProperty?.SetValue(context.OutputObj, inputProperty.GetValue(context.InputObj));
+            var outputProperty = FindMatchingOutputProperty(context);
+            outputProperty?.SetValue(context.OutputObj, inputProperty.GetValue(context.InputObj));
         }
 
         private PropertyInfo FindMatchingOutputProperty(ExecutionContext context)
